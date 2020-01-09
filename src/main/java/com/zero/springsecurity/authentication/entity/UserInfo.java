@@ -20,12 +20,6 @@ class UserInfo {
     public UserInfo() {
     }
 
-    public UserInfo(String username, String password, String fullname) {
-        this.username = username;
-        this.password = password;
-        this.fullname = fullname;
-    }
-
     public int getId() {
         return id;
     }
