@@ -2,12 +2,8 @@ package com.zero.springsecurity.entity;
 
 public class JwtResponse {
 
-    private static final long serialVersionUID = -8091879091924046844L;
-
+    private boolean isSuccessful;
     private String token;
-
-    public JwtResponse() {
-    }
 
     public JwtResponse(String token) {
         this.token = token;

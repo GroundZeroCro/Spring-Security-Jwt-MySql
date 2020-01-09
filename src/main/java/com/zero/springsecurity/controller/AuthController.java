@@ -10,6 +10,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.bind.ValidationException;
+
 @RestController
 @CrossOrigin
 class AuthController {
@@ -27,9 +29,13 @@ class AuthController {
     }
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    public ResponseEntity<?> createAuthenticationTOken(@RequestBody JwtRequest jwtRequest) {
+    public ResponseEntity<?> createAuthenticationTOken(@RequestBody JwtRequest jwtRequest) throws ValidationException {
 
-        authenticate(jwtRequest.getUsername(), jwtRequest.getPassword());
+        try {
+            authenticate(jwtRequest.getUsername(), jwtRequest.getPassword());
+        } catch (Exception e) {
+            throw new ValidationException("Wrong username or password");
+        }
         final UserDetails userDetails = jwtUserDetailsService.loadUserByUsername(jwtRequest.getUsername());
         final String token = jwtTokenUtil.generateToken(userDetails);
         return ResponseEntity.ok(new JwtResponse(token));
@@ -37,6 +43,5 @@ class AuthController {
 
     private void authenticate(String username, String password) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-
     }
 }
