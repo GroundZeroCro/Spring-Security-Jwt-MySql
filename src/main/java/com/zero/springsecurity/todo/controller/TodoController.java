@@ -17,7 +17,7 @@ class TodoController {
         this.todoRepository = todoRepository;
     }
 
-    @GetMapping("/")
+    @GetMapping
     public List<Todo> getTodo() {
         return this.todoRepository.findAll();
     }
