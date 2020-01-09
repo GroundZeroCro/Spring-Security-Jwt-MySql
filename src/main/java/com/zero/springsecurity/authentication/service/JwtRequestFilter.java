@@ -1,6 +1,6 @@
-package com.zero.springsecurity.service;
+package com.zero.springsecurity.authentication.service;
 
-import com.zero.springsecurity.utils.JwtTokenUtil;
+import com.zero.springsecurity.authentication.utils.JwtTokenUtil;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;

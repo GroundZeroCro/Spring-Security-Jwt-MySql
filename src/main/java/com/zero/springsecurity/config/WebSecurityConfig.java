@@ -1,8 +1,8 @@
 package com.zero.springsecurity.config;
 
-import com.zero.springsecurity.service.JwtAuthenticationEntryPoint;
-import com.zero.springsecurity.service.JwtRequestFilter;
-import com.zero.springsecurity.service.JwtUserDetailsService;
+import com.zero.springsecurity.authentication.service.JwtAuthenticationEntryPoint;
+import com.zero.springsecurity.authentication.service.JwtRequestFilter;
+import com.zero.springsecurity.authentication.service.JwtUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

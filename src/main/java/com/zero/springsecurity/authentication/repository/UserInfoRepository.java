@@ -1,6 +1,6 @@
-package com.zero.springsecurity.repository;
+package com.zero.springsecurity.authentication.repository;
 
-import com.zero.springsecurity.entity.UserInfo;
+import com.zero.springsecurity.authentication.entity.UserInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserInfoRepository extends JpaRepository<UserInfo, Integer> {

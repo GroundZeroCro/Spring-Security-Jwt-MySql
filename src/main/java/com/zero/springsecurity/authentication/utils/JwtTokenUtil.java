@@ -1,4 +1,4 @@
-package com.zero.springsecurity.utils;
+package com.zero.springsecurity.authentication.utils;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

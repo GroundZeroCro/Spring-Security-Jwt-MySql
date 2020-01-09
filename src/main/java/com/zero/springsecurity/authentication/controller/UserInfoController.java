@@ -1,7 +1,7 @@
-package com.zero.springsecurity.controller;
+package com.zero.springsecurity.authentication.controller;
 
-import com.zero.springsecurity.entity.UserInfo;
-import com.zero.springsecurity.repository.UserInfoRepository;
+import com.zero.springsecurity.authentication.entity.UserInfo;
+import com.zero.springsecurity.authentication.repository.UserInfoRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

@@ -1,4 +1,4 @@
-package com.zero.springsecurity.entity;
+package com.zero.springsecurity.authentication.entity;
 
 import java.io.Serializable;
 
