@@ -1,7 +1,7 @@
 package com.zero.springsecurity.todo.repository;
 
-import com.zero.springsecurity.todo.entity.Todo;
+import com.zero.springsecurity.todo.model.TodoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface TodoRepository extends JpaRepository<Todo, Integer> {
+public interface TodoRepository extends JpaRepository<TodoEntity, Integer> {
 }

@@ -1,9 +1,10 @@
-package com.zero.springsecurity.authentication.entity;
+package com.zero.springsecurity.authentication.model;
 
 import javax.persistence.*;
 
 @Entity
-public class User {
+@Table(name = "user")
+public class UserEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -11,16 +12,16 @@ public class User {
 
   private String username;
   private String password;
-  private String fullname;
+  private String fullName;
 
-  public User() {
+  public UserEntity() {
   }
 
   public int getId() {
     return id;
   }
 
-  public User setId(int id) {
+  public UserEntity setId(int id) {
     this.id = id;
     return this;
   }
@@ -29,7 +30,7 @@ public class User {
     return username;
   }
 
-  public User setUsername(String username) {
+  public UserEntity setUsername(String username) {
     this.username = username;
     return this;
   }
@@ -38,17 +39,17 @@ public class User {
     return password;
   }
 
-  public User setPassword(String password) {
+  public UserEntity setPassword(String password) {
     this.password = password;
     return this;
   }
 
-  public String getFullname() {
-    return fullname;
+  public String getFullName() {
+    return fullName;
   }
 
-  public User setFullname(String fullname) {
-    this.fullname = fullname;
+  public UserEntity setFullName(String fullname) {
+    this.fullName = fullname;
     return this;
   }
 }

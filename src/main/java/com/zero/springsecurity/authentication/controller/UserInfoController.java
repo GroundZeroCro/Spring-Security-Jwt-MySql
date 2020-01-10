@@ -1,6 +1,6 @@
 package com.zero.springsecurity.authentication.controller;
 
-import com.zero.springsecurity.authentication.entity.User;
+import com.zero.springsecurity.authentication.model.UserEntity;
 import com.zero.springsecurity.authentication.repository.UserInfoRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,14 +19,14 @@ class UserInfoController {
     }
 
     @PostMapping("/user")
-    public Boolean create(@RequestBody User user) throws ValidationException {
+    public Boolean create(@RequestBody UserEntity userEntity) throws ValidationException {
 
-        if (userInfoRepository.existsByUsername(user.getUsername())) {
+        if (userInfoRepository.existsByUsername(userEntity.getUsername())) {
             throw new ValidationException("User with that name already exists");
         }
-        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        userEntity.setPassword(new BCryptPasswordEncoder().encode(userEntity.getPassword()));
 
-        userInfoRepository.save(user);
+        userInfoRepository.save(userEntity);
         return true;
     }
 }

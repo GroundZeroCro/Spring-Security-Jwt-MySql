@@ -1,11 +1,12 @@
-package com.zero.springsecurity.todo.entity;
+package com.zero.springsecurity.todo.model;
 
-import com.zero.springsecurity.authentication.entity.User;
+import com.zero.springsecurity.authentication.model.UserEntity;
 
 import javax.persistence.*;
 
 @Entity
-public class Todo {
+@Table(name = "todo")
+public class TodoEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,16 +15,16 @@ public class Todo {
   private String content;
   @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "user_id")
-  private User user;
+  private UserEntity user;
 
-  public Todo() {
+  public TodoEntity() {
   }
 
   public int getId() {
     return id;
   }
 
-  public Todo setId(int id) {
+  public TodoEntity setId(int id) {
     this.id = id;
     return this;
   }
@@ -32,7 +33,7 @@ public class Todo {
     return title;
   }
 
-  public Todo setTitle(String title) {
+  public TodoEntity setTitle(String title) {
     this.title = title;
     return this;
   }
@@ -41,16 +42,16 @@ public class Todo {
     return content;
   }
 
-  public Todo setContent(String content) {
+  public TodoEntity setContent(String content) {
     this.content = content;
     return this;
   }
 
-  public User getUser() {
+  public UserEntity getUserEntity() {
     return user;
   }
 
-  public Todo setUser(User user) {
+  public TodoEntity setUserEntity(UserEntity user) {
     this.user = user;
     return this;
   }

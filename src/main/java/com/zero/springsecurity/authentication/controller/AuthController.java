@@ -1,7 +1,7 @@
 package com.zero.springsecurity.authentication.controller;
 
-import com.zero.springsecurity.authentication.entity.JwtRequest;
-import com.zero.springsecurity.authentication.entity.JwtResponse;
+import com.zero.springsecurity.authentication.model.JwtRequest;
+import com.zero.springsecurity.authentication.model.JwtResponse;
 import com.zero.springsecurity.authentication.service.JwtUserDetailsService;
 import com.zero.springsecurity.authentication.utils.JwtTokenUtil;
 import org.springframework.http.ResponseEntity;

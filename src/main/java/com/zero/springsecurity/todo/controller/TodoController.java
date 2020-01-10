@@ -1,9 +1,10 @@
 package com.zero.springsecurity.todo.controller;
 
-import com.zero.springsecurity.authentication.entity.User;
+import com.zero.springsecurity.authentication.model.UserEntity;
 import com.zero.springsecurity.authentication.repository.UserInfoRepository;
 import com.zero.springsecurity.authentication.utils.JwtTokenUtil;
-import com.zero.springsecurity.todo.entity.Todo;
+import com.zero.springsecurity.todo.model.TodoEntity;
+import com.zero.springsecurity.todo.model.TodoResponse;
 import com.zero.springsecurity.todo.repository.TodoRepository;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,32 +26,34 @@ class TodoController {
   }
 
   @GetMapping
-  public List<Todo> getTodo() {
-    return this.todoRepository.findAll();
+  public List<TodoResponse> getTodo() {
+    return TodoResponse.entitiesToResponses(this.todoRepository.findAll());
   }
 
   @GetMapping("/{id}")
-  public Todo getSingleTodo(@PathVariable String id) throws Exception {
-    return this.todoRepository.findById(Integer.parseInt(id)).orElseThrow(noItemWithIdException());
+  public TodoResponse getSingleTodo(@PathVariable String id) throws Exception {
+    TodoEntity todoEntity = this.todoRepository.findById(Integer.parseInt(id)).orElseThrow(noItemWithIdException());
+    return TodoResponse.entityToResponse(todoEntity);
   }
 
   @PostMapping("/add")
-  public Todo addTodo(@RequestBody Todo todo, @RequestHeader(value = "Authorization") String authorization) {
-    todo.setUser(getUser(authorization));
-    return this.todoRepository.save(todo);
+  public TodoEntity addTodo(@RequestBody TodoEntity todoEntity, @RequestHeader(value = "Authorization") String authorization) {
+    todoEntity.setUserEntity(getUser(authorization));
+    return this.todoRepository.save(todoEntity);
   }
 
-  private User getUser(String authorization) {
+  private UserEntity getUser(String authorization) {
     String username = jwtTokenUtil.getUsernameFromToken(authorization.substring(7));
     return userInfoRepository.findByUsername(username);
   }
 
   @PutMapping("/{id}")
-  public Todo updateTodo(@RequestBody Todo updatedTodo, @PathVariable String id) throws Exception {
-    Todo previousTodo = this.todoRepository.findById(Integer.parseInt(id)).orElseThrow(noItemWithIdException());
-    previousTodo.setTitle(updatedTodo.getTitle());
-    previousTodo.setContent(updatedTodo.getContent());
-    return this.todoRepository.save(previousTodo);
+  public boolean updateTodo(@RequestBody TodoEntity updatedTodoEntity, @PathVariable String id) throws Exception {
+    TodoEntity previousTodoEntity = this.todoRepository.findById(Integer.parseInt(id)).orElseThrow(noItemWithIdException());
+    previousTodoEntity.setTitle(updatedTodoEntity.getTitle());
+    previousTodoEntity.setContent(updatedTodoEntity.getContent());
+    this.todoRepository.save(previousTodoEntity);
+    return true;
   }
 
   private Supplier<? extends Exception> noItemWithIdException() {
