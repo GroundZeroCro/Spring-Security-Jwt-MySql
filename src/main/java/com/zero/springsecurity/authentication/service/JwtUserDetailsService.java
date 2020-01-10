@@ -1,9 +1,8 @@
 package com.zero.springsecurity.authentication.service;
 
-import com.zero.springsecurity.authentication.entity.UserInfo;
+import com.zero.springsecurity.authentication.entity.User;
 import com.zero.springsecurity.authentication.repository.UserInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -19,11 +18,11 @@ public class JwtUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        UserInfo userInfo = userInfoRepository.findByUsername(s);
+        User user = userInfoRepository.findByUsername(s);
 
-        if (userInfo == null) {
+        if (user == null) {
             throw new UsernameNotFoundException("User with that name not found");
         }
-        return new User(userInfo.getUsername(), userInfo.getPassword(), new ArrayList<>());
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), new ArrayList<>());
     }
 }
